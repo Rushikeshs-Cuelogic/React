@@ -1,6 +1,5 @@
 import React from "react";
 import { Dashboard } from "./Dashboard";
-
 export class Root extends React.Component {
     render() {
         return (

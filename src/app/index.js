@@ -3,9 +3,12 @@ import { Router, Route, browserHistory, IndexRoute } from "react-router";
 import { render } from "react-dom";
 import { Root } from "./components/Root";
 import { Dashboard } from "./components/Dashboard";
-import { Login } from "./components/Login";
-import { Register } from "./components/Register";
-import { Profile } from "./components/Profile";
+import { Login } from "./components/containers/Login";
+import { Register } from "./components/containers/Register";
+import { Profile } from "./components/containers/Profile";
+import { createStore } from "redux";
+import AllReducers from "./reducers";
+import { Provider } from "react-redux";
 
 class App extends React.Component {
     render() {
@@ -16,11 +19,13 @@ class App extends React.Component {
                     <Route path="register" component={Register} />
                     <Route path="signOut" component={Root} />
                 </Route>
-                 <Route path="profile/:userId/:email" component={Profile} />
+                <Route path="profile/:userId/:email" component={Profile} />
             </Router>
         );
-
     }
 }
 
-render(<App />, document.getElementById('appDiv-wrapper'));
+const store = createStore(AllReducers);
+render(<Provider store={store}>
+    <App /></Provider>,
+    document.getElementById('appDiv-wrapper'));
